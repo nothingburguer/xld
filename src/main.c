@@ -9,7 +9,8 @@
 #define PAGE_SIZE 0x1000
 #define TEXT_ADDR (BASE_ADDR + PAGE_SIZE)
 
-/* ----------------------------- structs ----------------------------- */
+#define BOLD  "\033[1m"
+#define RESET "\033[0m"
 
 typedef struct {
     Elf64_Shdr *text;
@@ -188,23 +189,31 @@ static void print_link_report(
     if (opt->silent)
         return;
 
-    printf("xld: input  = %s\n", opt->input_file);
-    printf("xld: output = %s\n", opt->output_file);
-    printf("xld: entry  = %s (0x%lx)\n", opt->entry_symbol, entry);
+    const int W = 7;
+
+    printf(BOLD "xld" RESET ": %-*s = %s\n", W, "input",  opt->input_file);
+    printf(BOLD "xld" RESET ": %-*s = %s\n", W, "output", opt->output_file);
+    printf(BOLD "xld" RESET ": %-*s = %s (0x%lx)\n",
+           W, "entry", opt->entry_symbol, entry);
 
     if (sec->text)
-        printf("xld: text size = %lu bytes\n", sec->text->sh_size);
+        printf(BOLD "xld" RESET ": %-*s = %lu bytes\n",
+               W, "text", sec->text->sh_size);
 
     if (sec->rodata)
-        printf("xld: rodata size = %lu bytes\n", sec->rodata->sh_size);
+        printf(BOLD "xld" RESET ": %-*s = %lu bytes\n",
+               W, "rodata", sec->rodata->sh_size);
 
     if (sec->data)
-        printf("xld: data size = %lu bytes\n", sec->data->sh_size);
+        printf(BOLD "xld" RESET ": %-*s = %lu bytes\n",
+               W, "data", sec->data->sh_size);
 
     if (sec->bss)
-        printf("xld: bss size = %lu bytes\n", sec->bss->sh_size);
+        printf(BOLD "xld" RESET ": %-*s = %lu bytes\n",
+               W, "bss", sec->bss->sh_size);
 
-    printf("\n");
+    printf("\nCopyright (c) 2026 nothingburguer\n");
+    printf("Licensed under MIT License. All Rights Reserved.\n");
 }
 
 
