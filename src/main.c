@@ -127,7 +127,7 @@ int main(int argc, char **argv) {
 
     fclose(out);
 
-    if (opt.verbose) {
+    if (!opt.silent) {
         printf("xld: input  = %s\n", opt.input_file);
         printf("xld: output = %s\n", opt.output_file);
         printf("xld: entry  = %s (0x%lx)\n",

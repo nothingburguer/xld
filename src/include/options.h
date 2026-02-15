@@ -7,7 +7,7 @@ typedef struct {
     const char *input_file;
     const char *output_file;
     const char *entry_symbol;
-    bool verbose;
+    bool silent;
 } xld_options_t;
 
 void options_init(xld_options_t *opt);

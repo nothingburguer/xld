@@ -7,7 +7,7 @@ void options_init(xld_options_t *opt) {
     opt->input_file   = NULL;
     opt->output_file  = "a.out";
     opt->entry_symbol = "_start";
-    opt->verbose      = false;
+    opt->silent       = false;
 }
 
 void options_usage(const char *prog) {
@@ -16,7 +16,7 @@ void options_usage(const char *prog) {
         "options:\n"
         "  -o <file>       output file (default: a.out)\n"
         "  -e <symbol>     entry symbol (default: _start)\n"
-        "  -v              verbose output\n"
+        "  -s              silent output\n"
         "  --help          show this help\n",
         prog
     );
@@ -38,8 +38,8 @@ void options_parse(int argc, char **argv, xld_options_t *opt) {
             }
             opt->entry_symbol = argv[i];
         }
-        else if (!strcmp(argv[i], "-v")) {
-            opt->verbose = true;
+        else if (!strcmp(argv[i], "-s")) {
+            opt->silent = true;
         }
         else if (!strcmp(argv[i], "--help")) {
             options_usage(argv[0]);
